@@ -1,6 +1,6 @@
 # Identicon
 
-**TODO: Add description**
+**An app that takes a string and generates an identicon image from the string**
 
 ## Installation
 
