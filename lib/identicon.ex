@@ -19,10 +19,18 @@ defmodule Identicon do
   end
 
   def build_grid(%Identicon.Image{hex: hex} = image) do
-    hex
-    |> Enum.chunk(3)
-    |> Enum.map(&mirror_row/1) #&func_name/argument number is passing a referrence of function
-    |> List.flatten
+    grid =
+      hex
+      # group into list of list of 3 elements
+      |> Enum.chunk(3)
+      # map to new list with mirrored rows
+      |> Enum.map(&mirror_row/1) #&func_name/argument number is passing a referrence of function
+      # flatten nested lists
+      |> List.flatten
+      # creates a list of tuples with first elem the elem, second the index
+      |> Enum.with_index
+
+    %Identicon.Image{image | grid: grid}
   end
 
   def mirror_row(row) do
